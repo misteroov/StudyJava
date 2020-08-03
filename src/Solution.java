@@ -55,7 +55,7 @@ public static class ReadFileThread  extends Thread implements ReadFileInterface{
         return this.fileName;
     }
     public void run(){
-        
+        //fsdfsd
     }
 }
     //add your code here - добавьте код тут
