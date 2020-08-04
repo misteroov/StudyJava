@@ -61,6 +61,7 @@ public static class ReadFileThread  extends Thread implements ReadFileInterface{
         for (String s : list) {
             sb.append(s + " ");
         }
+
         String finalLine = sb.toString();
         return finalLine;
     }
