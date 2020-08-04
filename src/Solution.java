@@ -1,6 +1,6 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Solution {
     public static String firstFileName;
@@ -28,6 +28,7 @@ static {
         ReadFileInterface f = new ReadFileThread();
         f.setFileName(fileName);
         f.start();
+        f.join();
         //add your code here - добавьте код тут
         System.out.println(f.getFileContent());
     }
@@ -43,18 +44,37 @@ static {
         void start();
     }
 public static class ReadFileThread  extends Thread implements ReadFileInterface{
-   private String fileName;
+  ArrayList <String> list = new ArrayList<>();
+  String fileName;
 
     @Override
     public void setFileName(String fullFileName) {
        fileName  = fullFileName;
+
     }
 
     @Override
     public String getFileContent() {
-        return this.fileName;
+
+        StringBuilder sb = new StringBuilder();
+
+        for (String s : list) {
+            sb.append(s + " ");
+        }
+        String finalLine = sb.toString();
+        return finalLine;
     }
     public void run(){
+       try  {
+           Scanner sc = new Scanner(new File(fileName));
+           while (sc.hasNextLine()){
+               String line = sc.nextLine();
+               list.add(line);
+           }
+           sc.close();
+       }catch (IOException e){
+           e.printStackTrace();
+       }
         //fsdfsd
     }
 }
