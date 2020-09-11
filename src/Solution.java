@@ -1,8 +1,29 @@
-import com.javarush.task.task16.task1631.common.ImageReader;
-import com.javarush.task.task16.task1631.common.ImageTypes;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+/*
+Ридер обертка
+*/
 
 public class Solution {
+    public static TestString testString = new TestString();
+
     public static void main(String[] args) {
-        ImageReader reader = ImageReaderFactory.getImageReader(ImageTypes.JPG);
+PrintStream consoleStream = System.out;
+ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
+PrintStream stream = new PrintStream(byteOut);
+System.setOut(stream);
+testString.printSomething();
+String s = byteOut.toString();
+
+System.setOut(consoleStream);
+        System.out.println(s);
+    }
+
+    public static class TestString {
+        public void printSomething() {
+            System.out.println("3+6=");
+        }
     }
 }
